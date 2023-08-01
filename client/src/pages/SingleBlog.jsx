@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
 import {AiFillEdit, AiFillDelete} from 'react-icons/ai'
 import { blogs } from "../data/index.js"
+import Header from "../components/Header.jsx"
+import Sidebar from "../components/Sidebar.jsx"
 
 
 
@@ -12,8 +14,12 @@ const SingleBlog = () => {
       const singleblog = blogs.filter((blog) => blog.id == id)
 
   return (
-    <div>
-       {
+    <>
+      <Header/>
+
+       <div className='flex mx-auto max-w-7xl px-2 sm:px-6 lg:px-8"'>
+        <div className='grow-[9] w-[70%]'>
+        {
           singleblog.map((blog) => (
             <div key={blog.id} className="m-[20px]">
                <img src={blog.img} alt="" 
@@ -29,17 +35,26 @@ const SingleBlog = () => {
                         <AiFillDelete className="text-red"/>
                      </div>
                   </div>
-                  <p className="text-[16px] italic mt-[10px]">1 hr ago</p>
+                  <div className="flex gap-[5px] items-center">
+                     <p className="text-[16px] bold mt-[10px]">Author: {blog.author}  | </p>
+                     <p className="text-[14px] italic mt-[10px]">1 hr ago</p>
+                  </div>
                </div>   
 
-               <p className="text-[18px] leading-[18px] mt-[15px] mb-[50px]">
+               <p className="text-[18px] leading-[25px] mt-[15px] mb-[50px] first-letter:ml-10 first-letter:text-3xl text-gray-light">
                   {blog.desc}
                </p> 
                
             </div>
           ))
        }
-    </div>
+
+        </div>
+        <div  className='grow-[3] w-[30%]'><Sidebar/></div>
+      </div>  
+
+       
+    </>
   )
 }
 export default SingleBlog

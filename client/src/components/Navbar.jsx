@@ -39,9 +39,11 @@ const Navbar = () => {
             </div>
 
             <div className='flex gap-[12px] items-center'>
-               <img src='https://img.freepik.com/free-icon/user_318-644324.jpg?w=2000' alt='unknown profile picture'
-               className='w-[40px]'
-               />
+               <Link to="/settings">
+                  <img src='https://img.freepik.com/free-icon/user_318-644324.jpg?w=2000' alt='unknown profile picture'
+                  className='w-[40px]'
+                  />
+               </Link>
                <BsSearch className='w-[23px] h-[23px]'/>
             </div>
          

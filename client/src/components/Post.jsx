@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
+
+
+
 const Post = ({id , title, desc, img, category}) => {
   return (
-     <>  
+     <> 
       <Link to={`/singleblog/${id}`} className="max-w-[350px] cursor-pointer">
          <img srcSet={img} alt="" 
          className="w-[100%] h-[280px] rounded-2xl object-cover"

@@ -20,7 +20,7 @@ export default {
       'red': '#FF0000',
       'gray-dark': '#273444',
       'gray': '#8492a6',
-      'gray-light': '#d3dce6',
+      'gray-light': '#888888',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

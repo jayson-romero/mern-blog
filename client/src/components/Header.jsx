@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <>
-      <div className="header relative mx-auto flex flex flex-col items-center">
+      <div className="relative mx-auto flex flex flex-col items-center">
          <div className="header-title absolute top-[20px] flex flex-col items-center">
             <h3 className="font-serif text-[25px] lg:text-[50px]">React & Node</h3>  
             <h1 className="font-serif text-[80px] md:text-[150px]">Blog</h1>

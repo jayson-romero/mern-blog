@@ -9,14 +9,18 @@ import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx';
 import SingleBlog from './pages/SingleBlog.jsx';
+import Write from './pages/Write.jsx';
+import Settings from './pages/Settings.jsx';
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
           <Route path="/" element={<Home />}>
-          <Route path="" element={<Posts />} />
-          <Route path="singleblog/:id" element={<SingleBlog />} component={SingleBlog}  />
+            <Route path="" element={<Posts />} />
+            <Route path="singleblog/:id" element={<SingleBlog />} component={SingleBlog}  />
+            <Route path="write" element={<Write />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
