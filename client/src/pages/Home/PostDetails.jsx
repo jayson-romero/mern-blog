@@ -1,24 +1,17 @@
 import { useParams } from "react-router-dom"
 import {AiFillEdit, AiFillDelete} from 'react-icons/ai'
-import { blogs } from "../data/index.js"
-import Header from "../components/Header.jsx"
-import Sidebar from "../components/Sidebar.jsx"
+import { blogs } from "../../data/index.js"
 
 
-
-
-
-const SingleBlog = () => {
+const PostDetails = () => {
    const { id } = useParams()
 
       const singleblog = blogs.filter((blog) => blog.id == id)
 
   return (
     <>
-      <Header/>
+     
 
-       <div className='flex mx-auto max-w-7xl px-2 sm:px-6 lg:px-8"'>
-        <div className='grow-[9] w-[70%]'>
         {
           singleblog.map((blog) => (
             <div key={blog.id} className="m-[20px]">
@@ -49,12 +42,8 @@ const SingleBlog = () => {
           ))
        }
 
-        </div>
-        <div  className='grow-[3] w-[30%]'><Sidebar/></div>
-      </div>  
-
-       
+    
     </>
   )
 }
-export default SingleBlog
+export default PostDetails

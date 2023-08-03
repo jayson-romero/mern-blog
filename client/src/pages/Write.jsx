@@ -1,6 +1,14 @@
 import {MdOutlineAddPhotoAlternate} from 'react-icons/md'
+import { Navigate } from 'react-router-dom'
 
 const Write = () => {
+
+   const user = true
+
+   if(!user) {
+      return <Navigate to='/register'/>
+   }
+
   return (
     <>
       <div className='m-6 flex flex-col mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>

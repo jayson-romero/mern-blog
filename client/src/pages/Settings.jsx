@@ -1,7 +1,14 @@
 import {CgProfile} from 'react-icons/cg'
 import Sidebar from "../components/Sidebar"
+import { Navigate } from 'react-router-dom'
 
 const Settings = () => {
+   const user = true
+
+   if(!user) {
+      return <Navigate to='/register'/>
+   }
+
   return (
     <>
        <div className='flex mx-auto max-w-7xl px-2 sm:px-6 lg:px-8"'>
@@ -26,24 +33,24 @@ const Settings = () => {
 
                   <div className='flex flex-col mb-16'>
                      
-                     <labe className="">Username</labe>
+                     <label className="">Username</label>
                      <input 
                         type="text" 
                         placeholder='Jayson'
                         className='rounded-md border-0 py-1.5 pl-7 pr-20  ring-1 ring-inset ring-gray-300 mb-4'/>
                      
-                     <labe>Email</labe>
+                     <label>Email</label>
                      <input 
                         type="email"
                         placeholder='Jayson@gmai.com'
                         className='rounded-md border-0 py-1.5 pl-7 pr-20  ring-1 ring-inset ring-gray-300 mb-4' />
                      
-                     <labe>Password</labe>
+                     <label>Password</label>
                      <input 
                         type="password" 
                         className=' rounded-md border-0 py-1.5 pl-7 pr-20  ring-1 ring-inset ring-gray-300 mb-4'/>
                      
-                     <labe>Confirm Password</labe>
+                     <label>Confirm Password</label>
                      <input 
                         type="password" 
                         className='rounded-md border-0 py-1.5 pl-7 pr-20 ring-1 ring-inset ring-gray-300 mb-8 '/>    
