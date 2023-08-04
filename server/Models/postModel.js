@@ -5,15 +5,24 @@ const postSchema = mongoose.Schema(
      title: {
        type: String,
        required: true,
+       unique: true
      },
-     author: {
+     username: {
        type: String,
-       required: true,
+       required: true
      },
      body: {
        type: String,
-       required: true,
+       required: true
      },
+     photo: {
+       type: String,
+       required: false
+     },
+     categories: {
+      type: Array,
+      required: false
+    },
    },
    {
      timestamps: true,
