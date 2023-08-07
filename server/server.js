@@ -10,6 +10,7 @@ import connectDB from "./config/db.js";
 import postRouter from './routes/postRoutes.js'
 import authRouter from './routes/authRoutes.js'
 import userRotuer from './routes/userRoutes.js'
+import categoryRouter from './routes/categoriesRoutes.js';
 
 
 
@@ -25,6 +26,7 @@ connectDB()
 app.use('/api/posts', postRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRotuer)
+app.use('/api/categories', categoryRouter)
 
 app.use(notFound)
 app.use(errorHandler)

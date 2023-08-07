@@ -4,18 +4,17 @@ const postSchema = mongoose.Schema(
    {
      title: {
        type: String,
-       required: true,
-       unique: true
+       required: true
      },
      username: {
        type: String,
        required: true
      },
-     body: {
+     desc: {
        type: String,
        required: true
      },
-     photo: {
+     img: {
        type: String,
        required: false
      },
