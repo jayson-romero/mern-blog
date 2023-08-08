@@ -1,6 +1,28 @@
-import {Link} from 'react-router-dom'
+import { useState } from 'react'
+import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios'
+import { toast } from 'react-toastify';
 
 const Register = () => {
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const navigate = useNavigate();
+  
+  const handleSumbit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/register", {username, email, password})
+      if(res) {
+        toast.success("Register Successly")
+        navigate("/")
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    }
+  }
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,19 +38,20 @@ const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSumbit}>
 
           <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
                 Username
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  id="username"
+                  name="username"
+                  type="username"
+                  autoComplete="username"
                   required
+                  onChange={e=>setUsername(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 "
                 />
               </div>
@@ -45,6 +68,7 @@ const Register = () => {
                   type="email"
                   autoComplete="email"
                   required
+                  onChange={e=>setEmail(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 "
                 />
               </div>
@@ -64,6 +88,7 @@ const Register = () => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  onChange={e=>setPassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 "
                 />
               </div>
@@ -78,11 +103,12 @@ const Register = () => {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type="password"
                   autoComplete="current-password"
                   required
+                  pattern={password}
                   className="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 "
                 />
               </div>

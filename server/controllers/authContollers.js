@@ -17,11 +17,8 @@ const login = asyncHandler( async(req, res) => {
    const user = await User.findOne({email}) 
    if(user && bcrypt.compareSync(password, user.password)) {
       generateToken(res, user._id)
-      res.status(200).json({
-         _id: user._id,
-         username: user.username,
-         email: user.email
-      })
+      const {password, ...other} = user._doc
+      res.status(200).json(other)
    } else {
       res.status(400)
       throw new Error("Wrong Credintials")

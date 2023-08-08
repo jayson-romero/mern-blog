@@ -1,10 +1,17 @@
+import { useContext } from 'react'
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter, BsSearch} from 'react-icons/bs'
 
 import {Link, NavLink} from 'react-router-dom'
+import { Context } from '../context/Context'
 
 const Navbar = () => {
 
-   const user = false
+   const {user, dispatch} = useContext(Context)
+
+   const handleLogout = () => {
+      dispatch({type: "LOGOUT"})
+   }
+ 
 
    const links = [
       { name: 'HOME', href: '/'},
@@ -40,7 +47,7 @@ const Navbar = () => {
                   
                ))               
                }  
-               <Link to="/login">{user && "LOGOUT"}</Link>
+               <Link to="/login" onClick={handleLogout}>{user && "LOGOUT"}</Link>
             </div>
 
           
@@ -48,7 +55,7 @@ const Navbar = () => {
                user ? 
                   <div className='flex gap-[12px] items-center'>
                      <Link to="/settings">
-                     <img src='https://img.freepik.com/free-icon/user_318-644324.jpg?w=2000' alt='unknown profile picture'
+                     <img src={user.profilePic} alt='unknown profile picture'
                      className='w-[40px]'
                      /></Link>
                      <BsSearch className='w-[23px] h-[23px]'/>

@@ -1,4 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route} from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //layout
 import RootLayout from './layout/RootLayout'
@@ -32,7 +34,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<RootLayout />}>
           <Route  element={<Home />}>
              <Route index element= {<Posts/>}/>
-             <Route path='singleblog/:id' element={<SingleBlog/>} component={SingleBlog}/>
+             <Route path='singleblog/:id' element={<SingleBlog/>}/>
           </Route>  
           
           <Route path="write" element={<Write/> } />
@@ -40,9 +42,11 @@ const router = createBrowserRouter(
 
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
+
+          <Route path="login" element={<Login/>}/>
+          <Route path="register" element={ <Register/>} />
     </Route>
-    <Route path="login" element={<Login/>}/>
-    <Route path="register" element={ <Register/>} />
+   
     <Route path="*" element={<NotFound/>} />  
     </> 
   ))
@@ -50,7 +54,9 @@ const router = createBrowserRouter(
 
   return (
     <>
+     
       <RouterProvider router={router}/>
+      <ToastContainer/>
     </>
   )
 }

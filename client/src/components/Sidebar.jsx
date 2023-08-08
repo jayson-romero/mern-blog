@@ -1,7 +1,19 @@
 import {Link} from 'react-router-dom'
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter} from 'react-icons/bs'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Sidebar = () => {
+   const [cats, setCats] = useState([]);
+
+   useEffect(() => {
+      const getCats = async () => {
+         const res = await axios.get('http://localhost:5000/api/categories')
+         setCats(res.data)
+      }
+      getCats()
+   },[])
+
   return (
     <>
       <div>
@@ -19,12 +31,9 @@ const Sidebar = () => {
          <div className="sidebarItem flex flex-col gap-3 gap-3 py-[10px]" >
             <h3 className="title text-[20px] font-semibold border-y-2 text-center">CATEGORIES</h3>
             <div className='flex gap-5 flex-wrap mx-[50px]'>
-               <Link>Life</Link>
-               <Link>Music</Link>
-               <Link>Style</Link>
-               <Link>Sport</Link>
-               <Link>Tech</Link>
-               <Link>Cinema</Link>
+               {cats.map((cat)=> (
+                  <Link to={`/?cat=${cat.name}`} key={cat._id}>{cat.name}</Link>
+               ))}
             </div>    
          </div>
        
