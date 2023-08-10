@@ -6,6 +6,10 @@ import {notFound, errorHandler} from './middleware/errorHandler.js'
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import multer from "multer";
+import path from 'path'
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename);
 //db
 import connectDB from "./config/db.js";
 //route
@@ -14,31 +18,34 @@ import authRouter from './routes/authRoutes.js'
 import userRotuer from './routes/userRoutes.js'
 import categoryRouter from './routes/categoriesRoutes.js';
 
-
-
-
-
-
 dotenv.config()
-app.use(cookieParser());
-app.use(express.json())
-app.use(cors());
-
 
 connectDB()
+app.use(cors({
+    origin: process.env.CLIENT_HOST, 
+    credentials: true
+}))
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.json())
+app.use("/images", express.static(path.join(__dirname,"/images")));
+
+
 
 const storage = multer.diskStorage({
    destination: (req, file, cb) => {
       cb(null, "images"); 
    },
    filename: (req, file, cb) => {
-      cb(null, "hello.jpeg")
+      cb(null, req.body.name)
    },
 })
 const upload = multer({storage: storage});
 app.post("/api/upload", upload.single("file"), (req, res) => {
    res.status(200).json("file has been uploaded")
 })
+
+
 
 app.use('/api/posts', postRouter)
 app.use('/api/auth', authRouter)

@@ -3,10 +3,11 @@ import { Link } from "react-router-dom"
 
 
 const Post = ({_id , title, desc, img, categories, createdAt}) => {
+   const PF = "http://localhost:5000/images/"
   return (
      <> 
       <Link to={`/singleblog/${_id}`} className="max-w-[350px] cursor-pointer">
-         {img && <img src={img} alt="" 
+         {img && <img src={ PF + img} alt="" 
          className="w-[100%] h-[280px] rounded-2xl object-cover"
          /> }
          

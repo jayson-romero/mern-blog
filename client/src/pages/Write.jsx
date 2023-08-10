@@ -1,5 +1,5 @@
 import {MdOutlineAddPhotoAlternate} from 'react-icons/md'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { Context } from '../context/Context'
 import { toast } from 'react-toastify';
@@ -8,15 +8,39 @@ import axios from 'axios';
 
 const Write = () => {
    const { user } = useContext(Context)
+   const navigate = useNavigate()
    const [ title, setTitle] = useState("")
    const [ desc, setDesc] = useState("")
    const [ file, setFile] = useState(null)
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      const newPost = {title, desc}
-      const res = await axios.post("http://localhost:5000/api/posts", newPost)
-
+      const newPost = {
+         title,
+         username: user.username,
+         desc
+      }
+      if (file) {
+         const data = new FormData();
+         const filename = Date.now() + file.name;
+         data.append("name", filename);
+         data.append("file", file);
+         newPost.img = filename;
+         try {
+            await axios.post("http://localhost:5000/api/upload", data )
+         } catch (error) {
+            console.log(error)
+         }
+      }
+      try {
+         const res =  await axios.post("http://localhost:5000/api/posts", newPost,  {
+            withCredentials: true,
+            credentials: 'include',
+          })
+         navigate(`/singleblog/${res.data._id}`)
+      } catch (error) {
+         console.log(error)
+      }
    }
 
 
@@ -28,15 +52,22 @@ const Write = () => {
   return (
     <>
       <div className='m-6 flex flex-col mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
-             <img src="https://media.istockphoto.com/id/496848472/vector/blog-blogging-and-blogglers-theme.jpg?s=612x612&w=0&k=20&c=mSpcEVoA-YeViMFD--ozz_CyP1UXnEgw89MpU8bwd9s=" alt="img" 
-               className="w-[100%] h-[280px] rounded-2xl object-cover"/>
+         { file && (
+            <img src={URL.createObjectURL(file)} alt="img" 
+              className="w-[100%] h-[280px] rounded-2xl object-cover"/>
+         )}
          <form onSubmit={handleSubmit}>
             <div className='m-6'>
                <label htmlFor='fileinput' className='flex items-center'>
                   <MdOutlineAddPhotoAlternate className='w-[30px] h-[30px]'/>
                   <p className='text-[14px] text-gray-light'>Add Photo</p>
                </label>
-               <input type="file" id="fileinput" className='hidden'/>
+               <input 
+               type="file" 
+               id="fileinput" 
+               className='hidden'
+               onChange={e => setFile(e.target.files[0])}
+               />
 
                <input 
                type="text" 
@@ -54,7 +85,7 @@ const Write = () => {
                ></textarea>
                <button
                type='submit'
-               className=' bg-primary inline-flex items-center justify-center rounded-md p-2.5 font-bold'
+               className='flex w-full justify-center rounded-md bg-primary py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark'
                >Publish</button>
             </div>
          </form>

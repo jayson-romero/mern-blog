@@ -28,7 +28,7 @@ const createPost = asyncHandler(async (req, res) => {
 const updatePost = asyncHandler(async (req, res) => {
    const user = await User.findById(req.user._id)
 
-   if(user.username === req.body.username) {
+   if(user) {
       const post = await Post.findById(req.params.id)
  
       if (post) {
@@ -56,7 +56,7 @@ const deletePost =  asyncHandler(async (req, res) => {
 
    const user = await User.findById(req.user._id)
 
-   if(user.username === req.body.username) {
+   if(user) {
       const post = await Post.findByIdAndDelete(req.params.id)
  
       if (post) {

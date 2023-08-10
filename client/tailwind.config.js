@@ -13,7 +13,7 @@ export default {
     },
     colors: {
       'primary': '#1fb6ff',
-      'purple': '#7e5bef',
+      'primary-dark': '#1f46ff',
       'white': '#ffffff',
       'orange': '#ff7849',
       'green': '#13ce66',

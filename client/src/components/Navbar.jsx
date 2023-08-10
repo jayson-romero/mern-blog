@@ -1,15 +1,24 @@
 import { useContext } from 'react'
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter, BsSearch} from 'react-icons/bs'
-
+import axios from 'axios'
 import {Link, NavLink} from 'react-router-dom'
 import { Context } from '../context/Context'
 
 const Navbar = () => {
 
    const {user, dispatch} = useContext(Context)
-
-   const handleLogout = () => {
-      dispatch({type: "LOGOUT"})
+   const PF = "http://localhost:5000/images/"
+   const handleLogout = async () => {
+      try {
+      
+        const res = await axios.get("http://localhost:5000/api/auth/logout")
+         if(res) {
+            dispatch({type: "LOGOUT"})
+         }
+      } catch (error) {
+         console.log(error)
+      }
+      
    }
  
 
@@ -55,8 +64,8 @@ const Navbar = () => {
                user ? 
                   <div className='flex gap-[12px] items-center'>
                      <Link to="/settings">
-                     <img src={user.profilePic} alt='unknown profile picture'
-                     className='w-[40px]'
+                     <img src={PF + user.profilePic} alt='unknown profile picture'
+                     className='w-[40px] rounded-full'
                      /></Link>
                      <BsSearch className='w-[23px] h-[23px]'/>
                   </div>

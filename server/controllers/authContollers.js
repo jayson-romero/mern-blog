@@ -50,7 +50,8 @@ const register = asyncHandler( async (req, res) => {
       const user = await User.create({
          username,
          password: hash,
-         email
+         email,
+         profilePic: "https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
       });
 
       if(user) {
@@ -69,7 +70,7 @@ const register = asyncHandler( async (req, res) => {
 })
 
 
-const logout = (req, res) => {
+const logout = asyncHandler((req, res) => {
     //REMOVE  COOKIES
    res.cookie('jwt', '', {
       httpOnly: true,
@@ -78,7 +79,7 @@ const logout = (req, res) => {
     res.status(200).json({ 
        message: 'Logged out successfully',     
       });
-}
+})
 
 
 

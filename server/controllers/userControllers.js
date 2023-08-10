@@ -23,6 +23,7 @@ const updateUser = asyncHandler(async (req, res) => {
     if (user) {
       user.username = req.body.username || user.username;
       user.email = req.body.email || user.email;
+      user.profilePic = req.body.profilePic || user.profilePic;
       if (req.body.password) {
          const salt = bcrypt.genSaltSync(10);
          const hash = bcrypt.hashSync(req.body.password, salt);

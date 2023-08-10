@@ -15,10 +15,15 @@ const Login = () => {
     e.preventDefault();
     dispatch({type: "LOGIN_START"});
     try {
-        const res = await axios.post("http://localhost:5000/api/auth/login", {
+        const res = await axios.post("http://localhost:5000/api/auth/login", { 
           email : userRef.current.value,
           password : passwordRef.current.value,
-        })
+        }, 
+        {
+          withCredentials: true,
+          credentials: 'include',
+        }
+        )
         dispatch({type: "LOGIN_SUCCESS", payload:res.data});
         toast.success("Login Success")
         navigate('/')
@@ -28,6 +33,7 @@ const Login = () => {
         toast.error(error?.response?.data?.message)
     }
 
+  
   }
 
   return (
@@ -86,7 +92,7 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className={`flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  ${isFetching? "cursor-wait disabled:hover:bg-purple" : "hover:bg-purple"}`}
+                className={`flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  ${isFetching? "cursor-wait disabled:hover:bg-primary-dark" : "hover:bg-primary-dark"}`}
               >
                 {isFetching? "Loading..." : "Sign-in"}
               </button>
