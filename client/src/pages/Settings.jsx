@@ -1,33 +1,28 @@
 import {CgProfile} from 'react-icons/cg'
 import Sidebar from "../components/Sidebar"
-import { Navigate } from 'react-router-dom'
-import { useContext, useState, useEffect } from 'react'
-import { Context } from '../context/Context'
+import { useContext, useEffect, useState } from 'react'
+
+import { UserContext } from '../context/userContext/userContext'
 import axios from 'axios'
-import {toast} from 'react-toastify'
+
+import { getUser } from '../context/userContext/apiCalls.js'
+
 
 const Settings = () => {
-   const {user} = useContext(Context)
+ 
+   const {user, dispatch, isFetching} = useContext(UserContext)
+   console.log(user)
    const [ username, setUsername] = useState("")
    const [ email, setEmail] = useState("")
    const [ password, setPassword] = useState("")
    const [ file, setFile] = useState(null)
+   
    const PF = "http://localhost:5000/images/"
 
-
-
    useEffect(() => {
-      const getUser = async () => {
-        const res = await axios.get("http://localhost:5000/api/user", {
-         withCredentials: true,
-         credentials: 'include',
-       } )
-        setUsername(res.data.username)
-        setEmail(res.data.email)
-      }
-      getUser()
-    },[])
-   
+      getUser(dispatch)
+   },[dispatch])
+
    const handleUpdate = async (e) => {
       e.preventDefault();
       const updatedUser = {
@@ -52,14 +47,16 @@ const Settings = () => {
             withCredentials: true,
             credentials: 'include',
           })
-          console.log(res)
+          setUsername(res.data.username)
+          setEmail(res.data.email)
+          setFile(null)
       } catch (error) {
          console.log(error)
       }
    }
 
-   if(!user) {
-      return <Navigate to='/register'/>
+   if(isFetching) {
+      return <p>loading</p>
    }
 
   return (
@@ -74,8 +71,18 @@ const Settings = () => {
                <form onSubmit={handleUpdate}>
                   <label>Profile Picture</label>
                   <div className="flex items-end gap-2 mb-8">
+                  {isFetching ? (
+                        <img src={null} alt=""
+                        className='w-[200px] h-[200px] rounded'/>
+                  )
+                   :
+                   (
                      <img src={file ? URL.createObjectURL(file) : PF+ user.profilePic} alt=""
                      className='w-[200px] h-[200px] rounded'/>
+                   )
+                  
+                  } 
+                   
                 
                   
                      <label htmlFor="fileinput">
@@ -93,14 +100,14 @@ const Settings = () => {
                      <label className="">Username</label>
                      <input 
                         type="text" 
-                        placeholder={username}
+                        placeholder={user.username}
                         onChange={e=> setUsername(e.target.value)}
                         className='rounded-md border-0 py-1.5 pl-7 pr-20  ring-1 ring-inset ring-gray-300 mb-4'/>
                      
                      <label>Email</label>
                      <input 
                         type="email"
-                        placeholder={email}
+                        placeholder={user.email}
                         onChange={e=> setEmail(e.target.value)}
                         className='rounded-md border-0 py-1.5 pl-7 pr-20  ring-1 ring-inset ring-gray-300 mb-4' />
                      
@@ -133,3 +140,12 @@ const Settings = () => {
   )
 }
 export default Settings
+
+export const currentUserLoader = async () => {
+   const res = await fetch("http://localhost:5000/api/user",  {
+     withCredentials: true,
+     credentials: 'include',
+   })
+
+   return res.json()
+}

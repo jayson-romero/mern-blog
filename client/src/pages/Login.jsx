@@ -1,39 +1,22 @@
 import { useContext, useRef } from 'react';
-import {Link, useNavigate} from 'react-router-dom'
-import { Context } from '../context/Context.jsx';
-import { toast } from 'react-toastify';
-import axios from 'axios'
+import {Link} from 'react-router-dom'
+import { UserContext } from '../context/userContext/userContext.jsx';
+import {login, getUser} from '../context/userContext/apiCalls.js';
 
 
 const Login = () => {
-  const navigate = useNavigate()
+
   const userRef = useRef()
   const passwordRef = useRef()
-  const { dispatch, isFetching } = useContext(Context)
+  const { user , isFetching, dispatch, localStorage} = useContext(UserContext)
+ 
   
-  const handleSubmit = async(e) =>{
-    e.preventDefault();
-    dispatch({type: "LOGIN_START"});
-    try {
-        const res = await axios.post("http://localhost:5000/api/auth/login", { 
-          email : userRef.current.value,
-          password : passwordRef.current.value,
-        }, 
-        {
-          withCredentials: true,
-          credentials: 'include',
-        }
-        )
-        dispatch({type: "LOGIN_SUCCESS", payload:res.data});
-        toast.success("Login Success")
-        navigate('/')
-
-    } catch (error) {
-        dispatch({type: "LOGIN_FAILURE"});
-        toast.error(error?.response?.data?.message)
-    }
-
-  
+  const handleSubmit = async(e) =>{ 
+      e.preventDefault();
+      login({ email:userRef.current.value , password : passwordRef.current.value}, dispatch);
+      getUser(dispatch)
+      console.log(localStorage)
+      // console.log(user)
   }
 
   return (
@@ -111,3 +94,27 @@ const Login = () => {
   )
 }
 export default Login
+
+
+ // const handleSubmit = async(e) =>{
+  //   e.preventDefault();
+  //   dispatch({type: "LOGIN_START"});
+  //   try {
+  //       const res = await axios.post("http://localhost:5000/api/auth/login", { 
+  //         email : userRef.current.value,
+  //         password : passwordRef.current.value,
+  //       }, 
+  //       {
+  //         withCredentials: true,
+  //         credentials: 'include',
+  //       }
+  //       )
+  //       dispatch({type: "LOGIN_SUCCESS", payload:res.data});
+  //       toast.success("Login Success")
+  //       navigate('/')
+
+  //   } catch (error) {
+  //       dispatch({type: "LOGIN_FAILURE"});
+  //       toast.error(error?.response?.data?.message)
+  //   }
+  // }

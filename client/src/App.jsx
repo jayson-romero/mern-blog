@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 //layout
 import RootLayout from './layout/RootLayout'
 
+// import { profilePicLoader } from './components/Navbar';
+
 //pages
 import Home from './pages/Home/Home';
 import Posts from './pages/Home/Posts';
@@ -31,14 +33,19 @@ function App() {
 const router = createBrowserRouter(
   createRoutesFromElements(
    <>
-    <Route path='/' element={<RootLayout />}>
+    <Route path='/' 
+          element={<RootLayout />}
+          // loader={profilePicLoader}
+          >
           <Route  element={<Home />}>
              <Route index element= {<Posts/>}/>
              <Route path='singleblog/:id' element={<SingleBlog/>}/>
           </Route>  
           
           <Route path="write" element={<Write/> } />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" 
+                element={<Settings />}/>
+                {/* loader={currentUserLoader}  */}
 
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />

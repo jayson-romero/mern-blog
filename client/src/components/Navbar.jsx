@@ -1,24 +1,23 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter, BsSearch} from 'react-icons/bs'
-import axios from 'axios'
-import {Link, NavLink} from 'react-router-dom'
-import { Context } from '../context/Context'
+
+import {Link, NavLink,} from 'react-router-dom'
+
+import { UserContext } from '../context/userContext/userContext.jsx'
+import { getUser, logout  } from '../context/userContext/apiCalls.js'
 
 const Navbar = () => {
-
-   const {user, dispatch} = useContext(Context)
+   // const currentUser = useLoaderData()
+   const {user, dispatch} = useContext(UserContext)
+ 
    const PF = "http://localhost:5000/images/"
-   const handleLogout = async () => {
-      try {
-      
-        const res = await axios.get("http://localhost:5000/api/auth/logout")
-         if(res) {
-            dispatch({type: "LOGOUT"})
-         }
-      } catch (error) {
-         console.log(error)
-      }
-      
+
+   useEffect(() => {
+      getUser(dispatch)
+   },[dispatch])
+
+   const handleLogout =  () => {
+      logout(dispatch)
    }
  
 
@@ -64,7 +63,7 @@ const Navbar = () => {
                user ? 
                   <div className='flex gap-[12px] items-center'>
                      <Link to="/settings">
-                     <img src={PF + user.profilePic} alt='unknown profile picture'
+                     <img src={PF+user.profilePic} alt='unknown profile picture'
                      className='w-[40px] rounded-full'
                      /></Link>
                      <BsSearch className='w-[23px] h-[23px]'/>
@@ -86,3 +85,12 @@ const Navbar = () => {
   )
 }
 export default Navbar
+
+// export const profilePicLoader = async () => {
+//     const res = await fetch("http://localhost:5000/api/user",  {
+//       withCredentials: true,
+//       credentials: 'include',
+//     })
+
+//     return res.json()
+// }
