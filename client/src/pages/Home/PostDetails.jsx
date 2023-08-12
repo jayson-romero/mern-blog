@@ -3,7 +3,7 @@ import {AiFillEdit, AiFillDelete} from 'react-icons/ai'
 // import { blogs } from "../../data/index.js"
 import { useEffect, useState, useContext } from "react"
 import axios from "axios"
-import { Context } from "../../context/Context"
+import { Context } from "../../context/LocalStorageContext/Context.jsx"
 import { toast } from "react-toastify"
 
 

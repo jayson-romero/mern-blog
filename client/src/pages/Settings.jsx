@@ -2,16 +2,17 @@ import {CgProfile} from 'react-icons/cg'
 import Sidebar from "../components/Sidebar"
 import { useContext, useEffect, useState } from 'react'
 
-import { UserContext } from '../context/userContext/userContext'
+import { AuthContext } from '../context/authContext/authContext.jsx'
 import axios from 'axios'
 
-import { getUser } from '../context/userContext/apiCalls.js'
+import { getUser } from '../context/authContext/apiCalls.js'
 
 
 const Settings = () => {
  
-   const {user, dispatch, isFetching} = useContext(UserContext)
+   const {user, dispatch, isFetching} = useContext(AuthContext)
    console.log(user)
+   console.log(isFetching)
    const [ username, setUsername] = useState("")
    const [ email, setEmail] = useState("")
    const [ password, setPassword] = useState("")
@@ -19,9 +20,9 @@ const Settings = () => {
    
    const PF = "http://localhost:5000/images/"
 
-   useEffect(() => {
-      getUser(dispatch)
-   },[dispatch])
+   // useEffect(() => {
+   //    getUser(dispatch)
+   // },[dispatch])
 
    const handleUpdate = async (e) => {
       e.preventDefault();
@@ -47,6 +48,7 @@ const Settings = () => {
             withCredentials: true,
             credentials: 'include',
           })
+          getUser(dispatch)
           setUsername(res.data.username)
           setEmail(res.data.email)
           setFile(null)
@@ -55,9 +57,12 @@ const Settings = () => {
       }
    }
 
-   if(isFetching) {
-      return <p>loading</p>
-   }
+  if(isFetching ) {
+     return (
+        <p>Loading</p>
+     )
+  } 
+  
 
   return (
     <>
@@ -71,19 +76,10 @@ const Settings = () => {
                <form onSubmit={handleUpdate}>
                   <label>Profile Picture</label>
                   <div className="flex items-end gap-2 mb-8">
-                  {isFetching ? (
-                        <img src={null} alt=""
-                        className='w-[200px] h-[200px] rounded'/>
-                  )
-                   :
-                   (
+         
                      <img src={file ? URL.createObjectURL(file) : PF+ user.profilePic} alt=""
-                     className='w-[200px] h-[200px] rounded'/>
-                   )
-                  
-                  } 
-                   
-                
+                     className='w-[200px] h-[200px] rounded'/>)
+                 
                   
                      <label htmlFor="fileinput">
                         <CgProfile className='w-[25px] h-[25px]'/>
@@ -141,11 +137,11 @@ const Settings = () => {
 }
 export default Settings
 
-export const currentUserLoader = async () => {
-   const res = await fetch("http://localhost:5000/api/user",  {
-     withCredentials: true,
-     credentials: 'include',
-   })
+// export const currentUserLoader = async () => {
+//    const res = await fetch("http://localhost:5000/api/user",  {
+//      withCredentials: true,
+//      credentials: 'include',
+//    })
 
-   return res.json()
-}
+//    return res.json()
+// }

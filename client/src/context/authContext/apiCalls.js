@@ -1,20 +1,6 @@
 import axios from 'axios'
-import { getUserStart, getUserSuccess, getUserFailure, logoutUser } from './userAction.js'
+import { getUserStart, getUserSuccess, getUserFailure, logoutUser } from './authAction.js'
 
-export const getUser = async (dispatch) => {
- 
-   try {
-     const res = await axios.get("http://localhost:5000/api/user", {
-      withCredentials: true,
-      credentials: 'include',
-    });
-     dispatch(getUserSuccess(res.data));
-   } catch (err) {
-     console.log(err)
-     dispatch(getUserFailure());
-   
-   }
- };
 
 
  export const login = async (user, dispatch) => {
@@ -40,5 +26,21 @@ export const getUser = async (dispatch) => {
     dispatch(logoutUser(res.data));
   } catch (err) {
     console.log(err)
+  }
+};
+
+
+export const getUser = async (dispatch) => {
+  dispatch(getUserStart());
+  try {
+    const res = await axios.get("http://localhost:5000/api/user", {
+     withCredentials: true,
+     credentials: 'include',
+   });
+    dispatch(getUserSuccess(res.data));
+  } catch (err) {
+    console.log(err)
+    dispatch(getUserFailure());
+  
   }
 };

@@ -1,25 +1,25 @@
 const UserReducer = (state, action) => {
    switch(action.type) {
-      case "GET_USER_START":
+      case "LOGIN_START":
       return {
          user: null,
-         localStorage: null,
+         usertAtlocalStorage: null,
          isFetching: true,
          error: false
       }
 
-      case "GET_USER_SUCCESS":
+      case "LOGIN_SUCCESS":
       return {
          user: action.payload,
-         localStorage: action.payload,
+         usertAtlocalStorage: action.payload,
          isFetching: false,
          error: false
       }
 
-      case "GET_USER_FAILURE":
+      case "LOGIN_FAILURE":
       return {
          user: null,
-         localStorage: null,
+         usertAtlocalStorage: null,
          isFetching: false,
          error: true
       }
@@ -27,7 +27,7 @@ const UserReducer = (state, action) => {
       case "LOGOUT":
          return{
             user: null,
-            localStorage: null,
+            usertAtlocalStorage: null,
             isFetching: false,
             error: false
          }  

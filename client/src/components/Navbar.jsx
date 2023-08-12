@@ -3,13 +3,13 @@ import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter, BsSearch} from 'react-i
 
 import {Link, NavLink,} from 'react-router-dom'
 
-import { UserContext } from '../context/userContext/userContext.jsx'
-import { getUser, logout  } from '../context/userContext/apiCalls.js'
+import { AuthContext } from '../context/authContext/authContext.jsx'
+import { getUser, logout  } from '../context/authContext/apiCalls.js'
 
 const Navbar = () => {
    // const currentUser = useLoaderData()
-   const {user, dispatch} = useContext(UserContext)
- 
+   const {user, dispatch, isFetching} = useContext(AuthContext)
+
    const PF = "http://localhost:5000/images/"
 
    useEffect(() => {

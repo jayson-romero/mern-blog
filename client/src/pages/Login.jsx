@@ -1,22 +1,21 @@
 import { useContext, useRef } from 'react';
 import {Link} from 'react-router-dom'
-import { UserContext } from '../context/userContext/userContext.jsx';
-import {login, getUser} from '../context/userContext/apiCalls.js';
+import { AuthContext } from '../context/authContext/authContext.jsx';
+import {login, getUser} from '../context/authContext/apiCalls.js';
 
 
 const Login = () => {
 
   const userRef = useRef()
   const passwordRef = useRef()
-  const { user , isFetching, dispatch, localStorage} = useContext(UserContext)
+  const { user , isFetching, dispatch, usertAtlocalStorage} = useContext(AuthContext)
  
   
   const handleSubmit = async(e) =>{ 
       e.preventDefault();
       login({ email:userRef.current.value , password : passwordRef.current.value}, dispatch);
-      getUser(dispatch)
-      console.log(localStorage)
-      // console.log(user)
+      console.log(usertAtlocalStorage)
+   
   }
 
   return (

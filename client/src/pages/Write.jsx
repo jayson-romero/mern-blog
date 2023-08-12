@@ -1,7 +1,7 @@
 import {MdOutlineAddPhotoAlternate} from 'react-icons/md'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
-import { Context } from '../context/Context'
+import { Context } from '../context/LocalStorageContext/Context.jsx'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
