@@ -1,13 +1,15 @@
 import {MdOutlineAddPhotoAlternate} from 'react-icons/md'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
-import { Context } from '../context/LocalStorageContext/Context.jsx'
+import { AuthContext } from '../context/authContext/authContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
 
 const Write = () => {
-   const { user } = useContext(Context)
+   const URL = "https://blog-w5bl.onrender.com"
+   const { user } = useContext(AuthContext)
+   console.log(user)
    const navigate = useNavigate()
    const [ title, setTitle] = useState("")
    const [ desc, setDesc] = useState("")
@@ -27,13 +29,13 @@ const Write = () => {
          data.append("file", file);
          newPost.img = filename;
          try {
-            await axios.post("http://localhost:5000/api/upload", data )
+            await axios.post(`${URL}/api/upload`, data )
          } catch (error) {
             console.log(error)
          }
       }
       try {
-         const res =  await axios.post("http://localhost:5000/api/posts", newPost,  {
+         const res =  await axios.post(`${URL}/api/posts`, newPost,  {
             withCredentials: true,
             credentials: 'include',
           })

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 
 const Post = ({_id , title, desc, img, categories, createdAt}) => {
-   const PF = "http://localhost:5000/images/"
+   const PF = "https://blog-w5bl.onrender.com/images/"
   return (
      <> 
       <Link to={`/singleblog/${_id}`} className="max-w-[350px] cursor-pointer">

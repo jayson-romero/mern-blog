@@ -1,0 +1,59 @@
+{
+  "blogs": [
+    {
+      "title": "Tamang Banka lang pare",
+      "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a",
+      "username": "John",
+      "categories": [
+        "Tech",
+        "Business"
+      ],
+      "img": "https://images.pexels.com/photos/675764/pexels-photo-675764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "createdAt": "2023-08-15T08:59:07.914Z",
+      "id": 2
+    },
+    {
+      "title": "Hello World",
+      "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a",
+      "username": "John",
+      "categories": [
+        "Tech",
+        "Business"
+      ],
+      "img": "https://images.pexels.com/photos/675764/pexels-photo-675764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "createdAt": "2023-08-15T08:59:27.249Z",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "title": "Hello World",
+      "username": "Angel",
+      "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a",
+      "categories": [
+        "Tech",
+        "Business"
+      ],
+      "img": "https://images.pexels.com/photos/1324803/pexels-photo-1324803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "createdAt": "2023-08-07T13:22:04.561+00:00"
+    }
+  ],
+
+  "users": [
+    {
+        "id": 1,
+        "username": "JaysonRomero",
+        "email": "jaysonromero@gmail.com",
+        "password": "password",
+        "profilePic": "https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg",
+        "createdAt": "2023-08-07T13:22:04.561+00:00"
+    },
+    {
+      "id": 2,
+      "username": "JaysonRomero",
+      "email": "jaysonromero@gmail.com",
+      "password": "password2",
+      "profilePic": "https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg",
+      "createdAt": "2023-08-07T13:22:04.561+00:00"
+    }
+]
+}

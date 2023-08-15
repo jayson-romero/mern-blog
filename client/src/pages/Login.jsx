@@ -8,14 +8,12 @@ const Login = () => {
 
   const userRef = useRef()
   const passwordRef = useRef()
-  const { user , isFetching, dispatch, usertAtlocalStorage} = useContext(AuthContext)
+  const { user , isFetching, dispatch, usertAtlocalStorage, error} = useContext(AuthContext)
  
   
   const handleSubmit = async(e) =>{ 
       e.preventDefault();
-      login({ email:userRef.current.value , password : passwordRef.current.value}, dispatch);
-      console.log(usertAtlocalStorage)
-   
+        login({ email:userRef.current.value , password : passwordRef.current.value}, dispatch); 
   }
 
   return (

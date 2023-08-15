@@ -9,7 +9,9 @@ import { getUser } from '../context/authContext/apiCalls.js'
 
 
 const Settings = () => {
- 
+   const URL = "https://blog-w5bl.onrender.com"
+   const PF = "https://blog-w5bl.onrender.com/images/"
+
    const {user, dispatch, isFetching} = useContext(AuthContext)
    console.log(user)
    console.log(isFetching)
@@ -17,8 +19,6 @@ const Settings = () => {
    const [ email, setEmail] = useState("")
    const [ password, setPassword] = useState("")
    const [ file, setFile] = useState(null)
-   
-   const PF = "http://localhost:5000/images/"
 
    // useEffect(() => {
    //    getUser(dispatch)
@@ -38,13 +38,13 @@ const Settings = () => {
          data.append("file", file);
          updatedUser.profilePic = filename;
          try {
-            await axios.post("http://localhost:5000/api/upload", data )
+            await axios.post(`${URL}/api/upload`, data )
          } catch (error) {
             console.log(error)
          }
       }
       try {
-         const res =  await axios.put("http://localhost:5000/api/user/ ", updatedUser,  {
+         const res =  await axios.put(`${URL}/api/user/ `, updatedUser,  {
             withCredentials: true,
             credentials: 'include',
           })
@@ -57,7 +57,7 @@ const Settings = () => {
       }
    }
 
-  if(isFetching ) {
+  if(isFetching) {
      return (
         <p>Loading</p>
      )

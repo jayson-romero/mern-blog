@@ -1,15 +1,15 @@
 
 export const getUserStart = () => ({
-   type: "GET_USER_START"
+   type: "LOGIN_START"
 })
 
 export const getUserSuccess = (user) => ({
-   type: "GET_USER_SUCCESS",
-   payload: user
+   type: "LOGIN_SUCCESS",
+   payload: user,
 })
 
 export const getUserFailure = () => ({
-   type: "GET_USER_FAILURE"
+   type: "LOGIN_FAILURE"
 })
 
 export const logoutUser = () => ({

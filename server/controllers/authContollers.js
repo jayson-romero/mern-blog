@@ -93,7 +93,7 @@ const generateToken = (res, userId) => {
       maxAge: 3600000, // Cookie expiration time in milliseconds (1 hour in this example)
       httpOnly: true,  //Restrict cookie access to HTTP(S) only
       secure: true, // Only send the cookie over HTTPS
-      sameSite: 'strict', // Restrict cookie sending to same-site requests
+      //sameSite: 'strict', // Restrict cookie sending to same-site requests
       secure: process.env.NODE_ENV !== 'development', // Use secure 
    });
  };

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //layout
 import RootLayout from './layout/RootLayout'
 
-// import { profilePicLoader } from './components/Navbar';
+
 
 //pages
 import Home from './pages/Home/Home';

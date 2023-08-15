@@ -7,10 +7,10 @@ import { AuthContext } from '../context/authContext/authContext.jsx'
 import { getUser, logout  } from '../context/authContext/apiCalls.js'
 
 const Navbar = () => {
-   // const currentUser = useLoaderData()
    const {user, dispatch, isFetching} = useContext(AuthContext)
 
-   const PF = "http://localhost:5000/images/"
+
+   const PF = "https://blog-w5bl.onrender.com/images/"
 
    useEffect(() => {
       getUser(dispatch)
@@ -86,11 +86,3 @@ const Navbar = () => {
 }
 export default Navbar
 
-// export const profilePicLoader = async () => {
-//     const res = await fetch("http://localhost:5000/api/user",  {
-//       withCredentials: true,
-//       credentials: 'include',
-//     })
-
-//     return res.json()
-// }

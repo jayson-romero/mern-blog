@@ -3,13 +3,12 @@ import {AiFillEdit, AiFillDelete} from 'react-icons/ai'
 // import { blogs } from "../../data/index.js"
 import { useEffect, useState, useContext } from "react"
 import axios from "axios"
-import { Context } from "../../context/LocalStorageContext/Context.jsx"
 import { toast } from "react-toastify"
 
 
 const PostDetails = () => {
    const navigate = useNavigate()
-   const {user} = useContext(Context)
+   // const {user} = useContext(Context)
    const [post, setPost] = useState({})
    const { id } = useParams()
    const PF = "http://localhost:5000/images/"
