@@ -15,7 +15,7 @@ const Navbar = () => {
 
       useEffect(() => {
         getUser(dispatch)
-      },[dispatch])
+      },[user])
    
 
 
