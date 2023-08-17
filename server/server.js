@@ -22,8 +22,8 @@ dotenv.config()
 
 connectDB()
 
-const corsOrigin ={
-   origin:'http://localhost:3000', //or whatever port your frontend is using
+const corsOrigin = {
+   origin: process.env.CLIENT_HOST, //or whatever port your frontend is using
    credentials:true,            
    optionSuccessStatus:200
 }
