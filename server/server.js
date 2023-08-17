@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000
 import {notFound, errorHandler} from './middleware/errorHandler.js'
 import cookieParser from "cookie-parser";
-import cors from 'cors'
+// import cors from 'cors'
 import multer from "multer";
 import path from 'path'
 import { fileURLToPath } from "url";
@@ -21,10 +21,10 @@ import categoryRouter from './routes/categoriesRoutes.js';
 dotenv.config()
 
 connectDB()
-app.use(cors({
-    origin: process.env.CLIENT_HOST, 
-    credentials: true
-}))
+// app.use(cors({
+//     origin: process.env.CLIENT_HOST, 
+//     credentials: true
+// }))
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json())
