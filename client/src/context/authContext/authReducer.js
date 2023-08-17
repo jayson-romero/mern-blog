@@ -3,7 +3,6 @@ const UserReducer = (state, action) => {
       case "LOGIN_START":
       return {
          user: null,
-         usertAtlocalStorage: null,
          isFetching: true,
          error: false
       }
@@ -11,7 +10,6 @@ const UserReducer = (state, action) => {
       case "LOGIN_SUCCESS":
       return {
          user: action.payload,
-         usertAtlocalStorage: action.payload,
          isFetching: false,
          error: false
       }
@@ -19,7 +17,6 @@ const UserReducer = (state, action) => {
       case "LOGIN_FAILURE":
       return {
          user: null,
-         usertAtlocalStorage: null,
          isFetching: false,
          error: true
       }
@@ -27,7 +24,6 @@ const UserReducer = (state, action) => {
       case "LOGOUT":
          return{
             user: null,
-            usertAtlocalStorage: null,
             isFetching: false,
             error: false
          }  

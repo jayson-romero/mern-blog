@@ -4,7 +4,7 @@ import { getUser, updateUser, deleteUser } from '../controllers/userControllers.
 import {verifyToken}  from '../middleware/verifyToken.js';
 
 //GET USER
-router.get('/', verifyToken, getUser)
+router.get('/', getUser)
 //UPDATE USER
 router.put('/',verifyToken, updateUser)
 //DELETE USER

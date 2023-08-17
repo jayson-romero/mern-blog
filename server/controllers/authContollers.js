@@ -83,8 +83,6 @@ const logout = asyncHandler((req, res) => {
 
 
 
-
-
 //GENERATE TOKEN
 const generateToken = (res, userId) => {
    const token = jwt.sign({ userId }, process.env.JWT_SECRET);

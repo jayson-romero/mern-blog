@@ -7,17 +7,21 @@ import { AuthContext } from '../context/authContext/authContext.jsx'
 import { getUser, logout  } from '../context/authContext/apiCalls.js'
 
 const Navbar = () => {
-   const {user, dispatch, isFetching} = useContext(AuthContext)
+   const {user, dispatch, removeToLocalStorage, isFetching} = useContext(AuthContext)
 
 
    const PF = "https://blog-w5bl.onrender.com/images/"
 
-   useEffect(() => {
-      getUser(dispatch)
-   },[dispatch])
+
+      useEffect(() => {
+        getUser(dispatch)
+      },[dispatch])
+   
+
 
    const handleLogout =  () => {
       logout(dispatch)
+      removeToLocalStorage()
    }
  
 
