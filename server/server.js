@@ -24,10 +24,11 @@ connectDB()
 
 const corsOrigin = {
    origin: process.env.CLIENT_HOST, //or whatever port your frontend is using
-   credentials:true,            
-   optionSuccessStatus:200
+   methods: ['GET', "POST"],
+   allowedHeaders: ['Content-Type', 'X-Custom-Header'],           
+   optionSuccessStatus: 200
 }
-app.use(cors({corsOrigin}))
+app.use(cors(corsOrigin))
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json())
