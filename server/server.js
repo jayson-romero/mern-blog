@@ -29,9 +29,10 @@ const corsOrigin = {
    credentials:true,            
    optionSuccessStatus:200
 }
-app.use(cors(corsOrigin))
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors(corsOrigin))
 app.use(express.json())
 app.use("/images", express.static(path.join(__dirname,"/images")));
 
