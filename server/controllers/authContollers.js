@@ -90,11 +90,10 @@ const generateToken = (res, userId) => {
    const token = jwt.sign({ userId }, process.env.JWT_SECRET);
  
    res.cookie('jwt', token, {
-      maxAge: 3600000, // Cookie expiration time in milliseconds (1 hour in this example)
-      httpOnly: true,  //Restrict cookie access to HTTP(S) only
-      secure: true, // Only send the cookie over HTTPS
-      //sameSite: 'strict', // Restrict cookie sending to same-site requests
-      secure: process.env.NODE_ENV !== 'development', // Use secure 
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
+      sameSite: 'strict', // Prevent CSRF attacks
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
    });
  };
 
