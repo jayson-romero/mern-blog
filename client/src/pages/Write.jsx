@@ -7,9 +7,7 @@ import axios from 'axios';
 
 
 const Write = () => {
-   const URL = "https://blog-w5bl.onrender.com"
    const { user } = useContext(AuthContext)
-   console.log(user)
    const navigate = useNavigate()
    const [ title, setTitle] = useState("")
    const [ desc, setDesc] = useState("")
@@ -29,13 +27,13 @@ const Write = () => {
          data.append("file", file);
          newPost.img = filename;
          try {
-            await axios.post(`${URL}/api/upload`, data )
+            await axios.post(`/api/upload`, data )
          } catch (error) {
             console.log(error)
          }
       }
       try {
-         const res =  await axios.post(`${URL}/api/posts`, newPost,  {
+         const res =  await axios.post(`/api/posts`, newPost,  {
             withCredentials: true,
             credentials: 'include',
           })
@@ -46,18 +44,14 @@ const Write = () => {
    }
 
 
-   if(!user) {
-      toast.error("kinly register to add blog")
-      return <Navigate to='/register'/>
-   }
 
   return (
     <>
       <div className='m-6 flex flex-col mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
-         { file && (
+         { file && 
             <img src={URL.createObjectURL(file)} alt="img" 
               className="w-[100%] h-[280px] rounded-2xl object-cover"/>
-         )}
+         }
          <form onSubmit={handleSubmit}>
             <div className='m-6'>
                <label htmlFor='fileinput' className='flex items-center'>

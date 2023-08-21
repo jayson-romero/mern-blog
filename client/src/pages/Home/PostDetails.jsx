@@ -1,17 +1,17 @@
 import { useParams, Link, useNavigate } from "react-router-dom"
 import {AiFillEdit, AiFillDelete} from 'react-icons/ai'
-// import { blogs } from "../../data/index.js"
 import { useEffect, useState, useContext } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { AuthContext } from "../../context/authContext/authContext"
 
 
 const PostDetails = () => {
    const navigate = useNavigate()
-   // const {user} = useContext(Context)
+   const {user} = useContext(AuthContext)
    const [post, setPost] = useState({})
    const { id } = useParams()
-   const PF = "http://localhost:5000/images/"
+   const PF = "https://blog-w5bl.onrender.com/images/"
    const [ title, setTitle] = useState("")
    const [desc, setDesc] = useState("")
    const [ updateMode, setUpdateMode] = useState(false)
@@ -19,7 +19,7 @@ const PostDetails = () => {
  
    useEffect(() => {
       const getPosts = async () => {
-        const res = await axios.get("http://localhost:5000/api/posts/" + id)
+        const res = await axios.get("/api/posts/" + id)
         setPost(res.data)
         setTitle(res.data.title)
         setDesc(res.data.desc)
@@ -30,7 +30,7 @@ const PostDetails = () => {
 
     const handleDelete = async () => {
        try {
-        const res = await axios.delete("http://localhost:5000/api/posts/" + id,  {
+        const res = await axios.delete("/api/posts/" + id,  {
             withCredentials: true,
             credentials: 'include',
           })
@@ -43,7 +43,7 @@ const PostDetails = () => {
 
     const handleUpdate = async () => { 
       try {
-         const res = await axios.put("http://localhost:5000/api/posts/" + id, {
+         const res = await axios.put("/api/posts/" + id, {
             title: title,
             desc: desc,
           }, {

@@ -8,14 +8,12 @@ import { getUser, logout  } from '../context/authContext/apiCalls.js'
 
 const Navbar = () => {
    const {user, dispatch, removeToLocalStorage, isFetching} = useContext(AuthContext)
-
-
    const PF = "https://blog-w5bl.onrender.com/images/"
 
 
-      useEffect(() => {
+   useEffect(() => {
         getUser(dispatch)
-      },[user])
+   },[dispatch])
    
 
 
@@ -67,9 +65,11 @@ const Navbar = () => {
                user ? 
                   <div className='flex gap-[12px] items-center'>
                      <Link to="/settings">
-                     <img src={PF+user.profilePic} alt='unknown profile picture'
+                    {isFetching && <p>Loading....</p>}    
+                    {user &&  <img src={PF+user.profilePic} alt='unknown profile picture'
                      className='w-[40px] rounded-full'
-                     /></Link>
+                     />} 
+                     </Link>
                      <BsSearch className='w-[23px] h-[23px]'/>
                   </div>
                   : 
